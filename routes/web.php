@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware('isAdmin')->get('/admin-dashboard', function () {
+    // Sólo accesible para administradores
+});
+
