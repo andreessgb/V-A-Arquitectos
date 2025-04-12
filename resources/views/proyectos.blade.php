@@ -125,9 +125,12 @@
 
         .service img {
             width: 100%;
+            height: 300px; /* puedes ajustar la altura como prefieras */
+            object-fit: cover;
             border-radius: 8px;
-            height: auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
+
 
         .service h3 {
             margin-top: 1rem;
@@ -205,7 +208,7 @@
             @if (Route::has('login'))
                 <div class="auth-links">
                     @auth
-                        <a href="{{ url('/proyectos') }}">Proyectos</a>
+                        <a href="{{ url('/') }}">Inicio</a>
                         <span class="mx-2"> <!-- Añade espacio horizontal entre enlaces -->
                             <a href="{{ url('/profile') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Perfil </a>
                         </span>
@@ -217,44 +220,35 @@
                     @endauth
                 </div>
             @endif
-
-            <!-- Contenedor principal -->
-            <div class="main-container" id="sobre-nosotros">
-                <h1>V-A-Arquitectos</h1>
-                <p class="intro-text">Bienvenidos a V-A-Arquitectos, un estudio de arquitectura dedicado a crear espacios innovadores y funcionales. Nuestro objetivo es ofrecer soluciones personalizadas para cada cliente, con un enfoque en la calidad, el diseño y la sostenibilidad. ¡Explora nuestros servicios y proyectos!</p>
-                
-                <!-- Imagen de bienvenida -->
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FzYSUyMG1vZGVybmF8ZW58MHx8MHx8fDA%3D" alt="Imagen de arquitectura">
-                </div>
-
-                <!-- Sección de servicios -->
-                <h2>Servicios que ofrecemos</h2>
-                <div class="services">
-                    <div class="service">
-                        <img src="https://dgdesignmodeling.com/wp-content/uploads/2024/04/diseno-arquitectonico.png" alt="Diseño arquitectónico">
-                        <h3>Diseño Arquitectónico</h3>
-                        <p>Creación de planos y diseños arquitectónicos a medida, adaptados a las necesidades de nuestros clientes.</p>
-                    </div>
-                    <div class="service">
-                        <img src="https://arm-actuarios.com/wp-content/uploads/2022/06/consultores-2.jpg" alt="Consultoría">
-                        <h3>Consultoría</h3>
-                        <p>Asesoramiento en todo el proceso de construcción, desde la idea inicial hasta la ejecución del proyecto.</p>
-                    </div>
-                    <div class="service">
-                        <img src="https://arqcos.com/wp-content/uploads/2020/03/arquitectura-sostenible2-1024x683-1.jpg" alt="Sostenibilidad">
-                        <h3>Sostenibilidad</h3>
-                        <p>Soluciones arquitectónicas y urbanísticas orientadas hacia la sostenibilidad y el respeto por el medio ambiente.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección sobre nosotros -->
-            <div class="about-us">
-                <h2>Sobre Nosotros</h2>
-                <p>V-A-Arquitectos es un estudio joven, con una gran pasión por el diseño arquitectónico. A pesar de haber comenzado recientemente, contamos con una amplia experiencia en proyectos innovadores y creativos, que demuestran nuestra capacidad para adaptarnos a las necesidades de cada cliente. Estamos comprometidos con la calidad y la sostenibilidad en cada proyecto que emprendemos.</p>
-            </div>
         </div>
+
+        <h1>Nuestros Proyectos</h1>
+        @php
+         // Array con URLs de imágenes de arquitectura (opcional)
+            $imagenesDemo = [
+            'https://i.pinimg.com/736x/2b/57/0b/2b570b0129ea9d17f362fb6b17be13da.jpg',
+            'https://plus.unsplash.com/premium_photo-1687960116228-13d383d20188?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGhlcm1vc2ElMjBjYXNhfGVufDB8fDB8fHww',
+            'https://source.unsplash.com/600x400/?modern-house',
+            'https://source.unsplash.com/600x400/?interior',
+            'https://source.unsplash.com/600x400/?design',
+            ];
+        @endphp
+
+        @if ($proyectos->count())
+            <div class="services">
+                @foreach ($proyectos as $index => $proyecto)
+                    <div class="service">
+                        <img src="{{ $imagenesDemo[$index % count($imagenesDemo)] }}" alt="Imagen de proyecto">
+                        <h3>{{ $proyecto->name }}</h3>
+                        <p>{{ $proyecto->description }}</p>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p style="text-align: center; color: #6b7280; font-size: 1.2rem;">No hay proyectos disponibles por el momento.</p>
+        @endif
+
+
     </div>
 
     <!-- Scripts de Laravel Breeze -->
