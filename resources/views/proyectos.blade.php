@@ -224,6 +224,13 @@
                 <div class="auth-links">
                     @auth
                         <a href="{{ url('/') }}">Inicio</a>
+                        <a href="{{ url('/contacto') }}">Contacto</a>
+                        @if(auth()->user()->projects->count() > 0)
+                            <a href="{{ route('cliente.proyectos') }}">Mis proyectos</a>
+                        @endif
+                        @if(auth()->user()->roles->contains('name', 'admin'))
+                            <a href="{{ route('admin.dashboard') }}">Administración</a>
+                        @endif
                         <span class="mx-2"> <!-- Añade espacio horizontal entre enlaces -->
                             <a href="{{ url('/profile') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Perfil </a>
                         </span>

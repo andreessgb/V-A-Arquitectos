@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClienteProyectoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,19 @@ use App\Http\Controllers\ProjectController;
 
 Route::get('/', function () {
     return view('home');
+});
+
+Route::view('/contacto', 'contacto');
+
+
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/administracion', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/administracion/proyectos', [AdminController::class, 'store'])->name('admin.projects.store');
+});
+
+
+Route::middleware(['auth', 'cliente'])->group(function () {
+    Route::get('/mis-proyectos', [ClienteProyectoController::class, 'index'])->name('cliente.proyectos');
 });
 
 
