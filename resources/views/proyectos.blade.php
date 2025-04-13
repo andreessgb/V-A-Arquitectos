@@ -125,12 +125,16 @@
 
         .service img {
             width: 100%;
-            height: 300px; /* puedes ajustar la altura como prefieras */
+            height: 300px;
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
         }
 
+        .service img:hover {
+            transform: scale(1.05);
+        }
 
         .service h3 {
             margin-top: 1rem;
@@ -142,6 +146,17 @@
             font-size: 1rem;
             color: #4b5563;
         }
+        .service ul {
+            list-style: none;
+            padding: 0;
+            
+        }
+
+        .service li span {
+            color: #3b82f6; /* Azul vivo */
+            font-weight: 600;
+        }
+
 
         /* Sección de contacto */
         .contact-section {
@@ -238,9 +253,18 @@
             <div class="services">
                 @foreach ($proyectos as $index => $proyecto)
                     <div class="service">
-                        <img src="{{ $imagenesDemo[$index % count($imagenesDemo)] }}" alt="Imagen de proyecto">
+                        <img src="{{ $proyecto->main_image }}" alt="Imagen de proyecto">
                         <h3>{{ $proyecto->name }}</h3>
                         <p>{{ $proyecto->description }}</p>
+                        <strong><p>Especificaciones:</p></strong>
+                        <ul>
+                        <li><span>Localización:</span> {{ $proyecto->location }}</li>
+                        <li><span>Metros cuadrados:</span> {{ $proyecto->square_meters }}</li>
+                        <li><span>Tipo:</span> {{ $proyecto->type }}</li>
+                        <li><span>Estado:</span> {{ $proyecto->status }}</li>
+                        <li><span>Presupuesto:</span> {{ $proyecto->budget }}€</li>
+                        <li><span>Fecha de inicio:</span> {{ $proyecto->start_date }}</li>
+                        </ul>
                     </div>
                 @endforeach
             </div>
