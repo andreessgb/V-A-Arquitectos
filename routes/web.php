@@ -26,6 +26,9 @@ Route::view('/contacto', 'contacto');
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/administracion', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/administracion/proyectos', [AdminController::class, 'store'])->name('admin.projects.store');
+    Route::get('/administracion/proyectos/{project}/editar', [AdminController::class, 'edit'])->name('admin.projects.edit');
+    Route::put('/administracion/proyectos/{project}', [AdminController::class, 'update'])->name('admin.projects.update');
+
 });
 
 

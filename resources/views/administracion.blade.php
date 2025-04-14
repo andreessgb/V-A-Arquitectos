@@ -163,6 +163,32 @@
             <button type="submit">Crear Proyecto</button>
         </form>
     </div>
+    <h2>Lista de Proyectos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Usuario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($projects as $project)
+            <tr>
+                <td>{{ $project->id }}</td>
+                <td>{{ $project->name }}</td>
+                <td>{{ $project->status }}</td>
+                <td>{{ $project->client?->name ?? 'No asignado' }}</td>
+                <td>
+                    <a href="{{ route('admin.projects.edit', $project->id) }}">Editar</a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
 
     <div class="table-wrapper">
         <h2>Lista de Usuarios</h2>
