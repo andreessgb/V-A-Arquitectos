@@ -110,6 +110,27 @@
             max-width: 1000px;
             margin-top: 2rem;
         }
+        .edit-link {
+            background-color: #3b82f6; /* azul igual al botón */
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .edit-link:hover {
+            background-color: #2563eb;
+        }
+
+        .edit-link:focus {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
+        }
+
     </style>
 </head>
 <body>
@@ -182,7 +203,7 @@
                 <td>{{ $project->status }}</td>
                 <td>{{ $project->client?->name ?? 'No asignado' }}</td>
                 <td>
-                    <a href="{{ route('admin.projects.edit', $project->id) }}">Editar</a>
+                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="edit-link">Editar</a>
                 </td>
             </tr>
             @endforeach
